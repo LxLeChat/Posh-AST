@@ -1,10 +1,12 @@
+## Create a ps1 file for each function present in the module file
+
+## Module must contains list of functions, otherwise it's pointless...
+$Path = 'C:\temp\zou\module.psm1'
+
+## Export Path
+$ExportPath = "c:\temp\module\Functions\Public"
 
 ## get AST from current file
-## Module contains list of functions
-## i want to create a ps1 file for each function present in the module
-
-$Path = 'C:\temp\zou\module.psm1'
-$ExportPath = "c:\temp\module\Functions\Public"
 $Raw = [System.Management.Automation.Language.Parser]::ParseFile($Path, [ref]$null, [ref]$Null)
 
 ## Find All functions and in the current module file
