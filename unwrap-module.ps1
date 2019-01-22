@@ -23,7 +23,7 @@ $ListOfFunctions.foreach({
 
 
 ################################
-
+##https://plus.google.com/events/co64vc41tkaivdpdihppt20trig
 ## Module must contains list of functions, otherwise it's pointless...
 $Path = 'C:\temp\zou\module.psm1'
 
