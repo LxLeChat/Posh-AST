@@ -20,3 +20,17 @@ $ListOfFunctions = $Raw.FindAll({$true}, $true) | Where-Object -FilterScript {
 $ListOfFunctions.foreach({
     $PSItem.RawCode >> "$ExportPath\$($PSItem.Name).ps1"
 })
+
+
+################################
+
+## Module must contains list of functions, otherwise it's pointless...
+$Path = 'C:\temp\zou\module.psm1'
+
+## Export Path
+$ExportPath = "c:\temp\module\Functions\Public"
+
+## get AST from current file
+$Raw = [System.Management.Automation.Language.Parser]::ParseFile($Path2, [ref]$null, [ref]$Null)
+## parse for functions, only functions ... not classes
+$raw.FindAll({$args[0] -is [System.Management.Automation.Language.FunctionDefinitionAst]}$False) | ForEach-Object -Process {If ( $_.Extent.Text -match '^function' ) { $_}} | select name
