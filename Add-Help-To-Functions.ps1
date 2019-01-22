@@ -1,3 +1,8 @@
+## checker les comments:
+## https://www.powershellgallery.com/packages/ISEScriptingGeek/3.3.1.2/Content/Get-ScriptComments.ps1
+## il faut ajouter 2 param au parsefile une variable créé avec new-variable genre:
+## new-variable test ::ParseFile($file.FullName, [ref]$test, [ref]$Null)
+## du coup ça donne une variable contenant des ... tokens
 ## créé une section help pour chaque fonction
 ## ajoute les parametres!
 
@@ -6,7 +11,7 @@ $path = 'C:\temp\zou\Functions\Public'
 Foreach ( $file in (gci -path $path -filter '*.ps1') ){
     $file.FullName
     $Raw = [System.Management.Automation.Language.Parser]::ParseFile($file.FullName, [ref]$null, [ref]$Null)
-    $params = $raw.FindAll({$args[0] -is [System.Management.Automation.Language.ParamBlockAst]},$true)
+    $params = $raw.FindAll({$args[0] -is [System.Management.Automation.Language.ParamBlockAst]},$False)
 
 $textToAdd = @"
 <#
