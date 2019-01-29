@@ -31,6 +31,9 @@ $Path = 'C:\temp\zou\module.psm1'
 $ExportPath = "c:\temp\module\Functions\Public"
 
 ## get AST from current file
-$Raw = [System.Management.Automation.Language.Parser]::ParseFile($Path2, [ref]$null, [ref]$Null)
+$Raw = [System.Management.Automation.Language.Parser]::ParseFile($Path, [ref]$null, [ref]$Null)
 ## parse for functions, only functions ... not classes
 $raw.FindAll({$args[0] -is [System.Management.Automation.Language.FunctionDefinitionAst]}$False) | ForEach-Object -Process {If ( $_.Extent.Text -match '^function' ) { $_}} | select name
+
+## trouve les classes
+$raw.FindAll({$args[0] -is [System.Management.Automation.Language.TypeDefinitionAst]},$False) | select name
